@@ -15,7 +15,7 @@
     "dtoSuffix": "DTO",
     "testFrameworks": [],
     "pages": [],
-    "creationTimestamp": 1617048890879,
+    "creationTimestamp": 1617050916586,
     "serviceDiscoveryType": false,
     "reactive": true,
     "authenticationType": "session",
@@ -38,7 +38,7 @@
     "enableTranslation": false,
     "nativeLanguage": "en",
     "packageFolder": "com/rfb",
-    "rememberMeKey": "4b99d4cac8a12dd1b8a15ff5d00fab02b8cc865550d1f7b312760a06f42f5d784bc2777ab2037b9da651a51cd7a83f0eb802",
+    "rememberMeKey": "401ebc79b04bacbdc26af0df63aad3eb907fe804e415d9f775595d159a5f304893d2d5887470fc598f33754537f073bbb15d",
     "clientPackageManager": "npm",
     "clientThemeVariant": "",
     "languages": ["en", "fr"]
