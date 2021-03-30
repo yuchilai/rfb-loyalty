@@ -21,3 +21,59 @@ jib {
     }
 }
 
+apply plugin: com.bmuschko.gradle.docker.DockerRemoteApiPlugin
+
+import com.bmuschko.gradle.docker.tasks.image.DockerBuildImage
+//import com.bmuschko.gradle.docker.tasks.image.DockerPushImage
+//
+docker {
+//    if (System.env.DOCKER_HOST) {
+        url = System.env.DOCKER_HOST
+//    }
+//    if (System.env.DOCKER_CERT_PATH) {
+        certPath = new File(System.env.DOCKER_CERT_PATH)
+//    }
+//    registryCredentials {
+//        //url default value
+//        //url = 'https://index.docker.io/v1/'
+//        username = 'springframeworkguru'
+//        password = (System.env.DOCKER_HUB_PWD)
+//        email = 'john@springframework.guru'
+//    }
+}
+
+task copyDockerFiles(type: Copy) {
+    description = "Copy Dockerfile and required data to build directory"
+    from 'src/main/docker'
+    from "${project.buildDir}/libs"
+    into { "${project.buildDir}/docker" }
+    include "*"
+    exclude "**/*.yml"
+}
+
+//def rfbImageName = 'springframeworkguru/rfbloyalty'
+//
+task buildDocker(type: DockerBuildImage, dependsOn: 'copyDockerFiles') {
+    description = "Package application as Docker image"
+    group = "Docker"
+    inputDir = project.file("${project.buildDir}/docker")
+    tags = ["${rfbImageName}:latest".toString(), "${rfbImageName}:${project.version}".toString()]
+}
+
+/**
+ * Use to push latest tag to docker hub
+ *
+ * Note: at this time the plugin does not support pushing multiple tags
+ */
+//task pushDockerLatest(type: DockerPushImage, dependsOn: 'buildDocker') {
+//    imageName = rfbImageName
+//    tag = "latest"
+//}
+//
+/**
+ * Use to push project version tag to docker hub
+ */
+//task pushDockerVersionTag(type: DockerPushImage, dependsOn: 'buildDocker') {
+//    imageName = rfbImageName
+//    tag =  "${project.version}".toString()
+//}
