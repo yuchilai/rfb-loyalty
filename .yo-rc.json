@@ -41,6 +41,8 @@
     "rememberMeKey": "401ebc79b04bacbdc26af0df63aad3eb907fe804e415d9f775595d159a5f304893d2d5887470fc598f33754537f073bbb15d",
     "clientPackageManager": "npm",
     "clientThemeVariant": "",
-    "languages": ["en", "fr"]
+    "languages": ["en", "fr"],
+    "entities": ["RfbLocation", "RfbEvent", "RfbEventAttendance", "RfbUser"],
+    "lastLiquibaseTimestamp": 1617398982000
   }
 }
