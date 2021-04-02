@@ -1,0 +1,79 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-rfb-event-attendance-heading" data-cy="RfbEventAttendanceCreateUpdateHeading">Create or edit a Rfb Event Attendance</h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_attendanceDate">Attendance Date</label>
+          <div class="input-group">
+            <input
+              id="field_attendanceDate"
+              data-cy="attendanceDate"
+              type="text"
+              class="form-control"
+              name="attendanceDate"
+              ngbDatepicker
+              #attendanceDateDp="ngbDatepicker"
+              formControlName="attendanceDate"
+            />
+            <span class="input-group-append">
+              <button type="button" class="btn btn-secondary" (click)="attendanceDateDp.toggle()">
+                <fa-icon icon="calendar-alt"></fa-icon>
+              </button>
+            </span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_rfbEvent">Rfb Event</label>
+          <select class="form-control" id="field_rfbEvent" data-cy="rfbEvent" name="rfbEvent" formControlName="rfbEvent">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="rfbEventOption.id === editForm.get('rfbEvent')!.value?.id ? editForm.get('rfbEvent')!.value : rfbEventOption"
+              *ngFor="let rfbEventOption of rfbEventsSharedCollection; trackBy: trackRfbEventById"
+            >
+              {{ rfbEventOption.id }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_rfbUser">Rfb User</label>
+          <select class="form-control" id="field_rfbUser" data-cy="rfbUser" name="rfbUser" formControlName="rfbUser">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="rfbUserOption.id === editForm.get('rfbUser')!.value?.id ? editForm.get('rfbUser')!.value : rfbUserOption"
+              *ngFor="let rfbUserOption of rfbUsersSharedCollection; trackBy: trackRfbUserById"
+            >
+              {{ rfbUserOption.id }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,36 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="rfbLocation">
+      <h2 data-cy="rfbLocationDetailsHeading"><span>Rfb Location</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ rfbLocation.id }}</span>
+        </dd>
+        <dt><span>Location Name</span></dt>
+        <dd>
+          <span>{{ rfbLocation.locationName }}</span>
+        </dd>
+        <dt><span>Run Day Of Week</span></dt>
+        <dd>
+          <span>{{ rfbLocation.runDayOfWeek }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/rfb-location', rfbLocation.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

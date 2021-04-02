@@ -1,0 +1,73 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-rfb-event-heading" data-cy="RfbEventCreateUpdateHeading">Create or edit a Rfb Event</h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_eventDate">Event Date</label>
+          <div class="input-group">
+            <input
+              id="field_eventDate"
+              data-cy="eventDate"
+              type="text"
+              class="form-control"
+              name="eventDate"
+              ngbDatepicker
+              #eventDateDp="ngbDatepicker"
+              formControlName="eventDate"
+            />
+            <span class="input-group-append">
+              <button type="button" class="btn btn-secondary" (click)="eventDateDp.toggle()">
+                <fa-icon icon="calendar-alt"></fa-icon>
+              </button>
+            </span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_eventCode">Event Code</label>
+          <input type="text" class="form-control" name="eventCode" id="field_eventCode" data-cy="eventCode" formControlName="eventCode" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_rfbLocation">Rfb Location</label>
+          <select class="form-control" id="field_rfbLocation" data-cy="rfbLocation" name="rfbLocation" formControlName="rfbLocation">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="
+                rfbLocationOption.id === editForm.get('rfbLocation')!.value?.id ? editForm.get('rfbLocation')!.value : rfbLocationOption
+              "
+              *ngFor="let rfbLocationOption of rfbLocationsSharedCollection; trackBy: trackRfbLocationById"
+            >
+              {{ rfbLocationOption.id }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

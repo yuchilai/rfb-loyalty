@@ -1,0 +1,42 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="rfbEvent">
+      <h2 data-cy="rfbEventDetailsHeading"><span>Rfb Event</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ rfbEvent.id }}</span>
+        </dd>
+        <dt><span>Event Date</span></dt>
+        <dd>
+          <span>{{ rfbEvent.eventDate | formatMediumDate }}</span>
+        </dd>
+        <dt><span>Event Code</span></dt>
+        <dd>
+          <span>{{ rfbEvent.eventCode }}</span>
+        </dd>
+        <dt><span>Rfb Location</span></dt>
+        <dd>
+          <div *ngIf="rfbEvent.rfbLocation">
+            <a [routerLink]="['/rfb-location', rfbEvent.rfbLocation?.id, 'view']">{{ rfbEvent.rfbLocation?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/rfb-event', rfbEvent.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

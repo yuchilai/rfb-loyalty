@@ -1,0 +1,44 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="rfbEventAttendance">
+      <h2 data-cy="rfbEventAttendanceDetailsHeading"><span>Rfb Event Attendance</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ rfbEventAttendance.id }}</span>
+        </dd>
+        <dt><span>Attendance Date</span></dt>
+        <dd>
+          <span>{{ rfbEventAttendance.attendanceDate | formatMediumDate }}</span>
+        </dd>
+        <dt><span>Rfb Event</span></dt>
+        <dd>
+          <div *ngIf="rfbEventAttendance.rfbEvent">
+            <a [routerLink]="['/rfb-event', rfbEventAttendance.rfbEvent?.id, 'view']">{{ rfbEventAttendance.rfbEvent?.id }}</a>
+          </div>
+        </dd>
+        <dt><span>Rfb User</span></dt>
+        <dd>
+          <div *ngIf="rfbEventAttendance.rfbUser">
+            <a [routerLink]="['/rfb-user', rfbEventAttendance.rfbUser?.id, 'view']">{{ rfbEventAttendance.rfbUser?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/rfb-event-attendance', rfbEventAttendance.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>
